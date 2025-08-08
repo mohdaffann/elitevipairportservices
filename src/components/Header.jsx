@@ -1,6 +1,6 @@
 import { User, ShoppingBag, Menu, X } from "lucide-react";
 import React, { useState, useEffect } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { href, NavLink, useLocation } from "react-router-dom";
 import NavDropdown from "./NavDropdown";
 import MobileDropdown from "./MobileDropdown";
 function Header() {
@@ -21,8 +21,10 @@ function Header() {
     }, [isHome]);
 
     const servicesItems = [
-        { name: 'Meet and Greet', href: '/services/meet-and-greet' },
-        { name: 'Transportation', href: '/transports' }
+        { name: 'MEET & GREET', href: '/services/meet-and-greet' },
+        { name: 'VIP LOUNGE PASS', href: '/lounge', subjAvail: true },
+        { name: 'FAST TRACK', href: '/fasttrack', subjAvail: true },
+
 
     ];
 
@@ -39,8 +41,13 @@ function Header() {
             }`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
-                    <NavLink className='flex items-center'>
-                        <img src="/logo-wide.png" className="w-32 h-10" />
+                    <NavLink className='flex items-center' to={''} onClick={() => {
+                        setTimeout(() => {
+                            setIsMobileMenuOpen(false);
+                            setOpenDropdown(null);
+                        }, 50);
+                    }}>
+                        <img src="/logo-wide.png" className="w-52 h-14" />
                     </NavLink>
                     <nav className="hidden lg:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
 
@@ -56,26 +63,16 @@ function Header() {
                             title="SERVICES"
                             items={servicesItems}
                         />
-
-                        <NavLink to={'/termsandconditions'} className="text-white hover:text-gray-300 transition-colors duration-200 font-medium tracking-wide text-sm">
-                            TERMS & CONDITIONS
-                        </NavLink>
+                        <NavDropdown
+                            title="BOOK NOW"
+                            items={bookNowItems}
+                            className="border border-white rounded px-3 py-1 self-center  hover:text-gray-900 transition-all duration-200"
+                        />
 
 
                     </nav>
 
-                    {/* Right Side - Book Now & Icons */}
-                    <div className="hidden lg:flex items-center space-x-4">
-                        <NavDropdown
-                            title="BOOK NOW"
-                            items={bookNowItems}
-                            className="border border-white rounded px-3 py-1  hover:text-gray-900 transition-all duration-200"
-                        />
 
-
-
-
-                    </div>
 
                     {/* Mobile menu button */}
                     <div className="lg:hidden ">
@@ -92,11 +89,22 @@ function Header() {
                 {isMobileMenuOpen && (
                     <div className="lg:hidden border-t border-gray-800 py-4">
                         <div className="flex flex-col space-y-4">
-                            <NavLink to={''} className="text-white hover:text-gray-300 transition-colors duration-200 font-medium tracking-wide text-sm">
+                            <NavLink to={''} onClick={() => {
+                                setTimeout(() => {
+                                    setIsMobileMenuOpen(false);
+                                    setOpenDropdown(null);
+                                }, 50);
+
+                            }} className="text-white hover:text-gray-300 transition-colors duration-200 font-medium tracking-wide text-sm">
                                 HOME
                             </NavLink>
 
-                            <NavLink to={'/locations'} className="text-white hover:text-gray-300 transition-colors duration-200 font-medium tracking-wide text-sm">
+                            <NavLink to={'/locations'} onClick={() => {
+                                setTimeout(() => {
+                                    setIsMobileMenuOpen(false);
+                                    setOpenDropdown(null);
+                                }, 50);
+                            }} className="text-white hover:text-gray-300 transition-colors duration-200 font-medium tracking-wide text-sm">
                                 LOCATIONS
                             </NavLink>
 
@@ -113,9 +121,7 @@ function Header() {
 
 
 
-                            <NavLink to={'/termsandconditions'} className="text-white hover:text-gray-300 transition-colors duration-200 font-medium tracking-wide text-sm">
-                                TERMS & CONDITIONS
-                            </NavLink>
+
                             <MobileDropdown
                                 title="BOOK NOW"
                                 items={bookNowItems}
