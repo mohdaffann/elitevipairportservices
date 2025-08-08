@@ -9,17 +9,18 @@ const BookForm = () => {
     console.log(serviceType, airport);
 
     const nav = useNavigate();
-    const timeSlots = [
-        "10:30 AM",
-        "10:40 AM",
-        "10:50 AM",
-        "11:00 AM",
-        "11:10 AM",
-        "11:20 AM",
-        "11:30 AM",
-        "11:40 AM",
-        "11:50 AM",
-    ]
+    function genTimeSlot() {
+        const slots = [];
+        for (let hr = 0; hr < 24; hr++) {
+            for (let min = 0; min < 60; min += 5) {
+                const hour = String(hr).padStart(2, '0');
+                const minute = String(min).padStart(2, '0');
+                slots.push(`${hour} : ${minute}`)
+            }
+        }
+        return slots;
+    }
+    const timeSlots = genTimeSlot();
     const {
         register,
         handleSubmit,
@@ -43,13 +44,16 @@ const BookForm = () => {
         -Golf Cart : ${data.golfCart ? 'Yes' : 'No'}
         -Baggage Porter : ${data.baggagePorter ? 'Yes' : 'No'}
         -Transportation : ${data.transportation ? 'Yes' : 'No'}
+        -Fast Track : ${data.fastTrack ? 'Yes' : 'No'}
+        -Lounge Pass : ${data.loungePass ? 'Yes' : 'No'}
+        -Number of Bags : ${data.bags}
         -Additional Info : ${data.additionalInfo}
         `;
         if (serviceType === 'arrival') {
             msgBody += `
             Flight Details :
-            -Arrival Date : ${data.arrivalDate}
-            -Arrival Time : ${data.time}
+            -Arrival Date : ${formatDate(data.arrivalDate)}
+            -Flight Time : ${data.time}
             -Departure Airport : ${data.departureAirport}
             -Arrival Airport : ${data.arrivalAirport}
             -Flight Number : ${data.flightNumber}
@@ -58,8 +62,8 @@ const BookForm = () => {
         else if (serviceType === 'departure') {
             msgBody += `
             Flight Details :
-            -Departure Date : ${data.departureDate}
-            -Departure Time : ${data.time}
+            -Departure Date : ${formatDate(data.departureDate)}
+            -Flight Time : ${data.time}
             -Departure Airport : ${data.departureAirport}
             -Destination Airport : ${data.destinationAirport}
             -Flight Number : ${data.flightNumber}
@@ -68,7 +72,7 @@ const BookForm = () => {
         else if (serviceType === 'transit') {
             msgBody += `
             Flight Details :
-            -Transit Date : ${data.transitDate}
+            -Transit Date : ${formatDate(data.transitDate)}
             -Arrival Airport : ${data.arrivalAirport}
             -Arrival Flight Time : ${data.arrivalflightTime}
             -Arrival Flight Number : ${data.arrivalflightNumber}
@@ -78,7 +82,7 @@ const BookForm = () => {
             `;
         }
         const emailParams = {
-            name: `${data.firstName} ${data.lastName}`,
+            name: `${data.LeadPassengerName}`,
             email: data.email,
             title: `${serviceType.charAt(0).toUpperCase() + serviceType.slice(1)}-${airport}`,
             message: msgBody.trim()
@@ -92,7 +96,7 @@ const BookForm = () => {
         )
             .then((res) => {
                 console.log('mail response', res);
-                alert('Booking request sent successfully!');
+                alert('We appreciate your booking with us. A member of our team will contact you soon to confirm the details.');
             }
             )
             .catch((err) => {
@@ -109,6 +113,11 @@ const BookForm = () => {
     const handleServiceType = (e) => {
         const selected = e.target.value;
         nav(`/book/${airport}/${selected}`)
+    }
+
+    const formatDate = (date) => {
+        const [year, month, day] = date.split('-');
+        return `${day}-${month}-${year}`
     }
 
     return (
@@ -183,21 +192,23 @@ const BookForm = () => {
 
 
 
+            {(serviceType === 'arrival' || serviceType === 'departure') && (
+                <div>
 
-            <div>
+                    <label className="block text-sm font-medium mb-1">Flight Time</label>
+                    <select
+                        {...register("time", { required: true })}
+                        className="w-full border rounded-md p-2 bg-white text-gray-800"
+                    >
+                        {timeSlots.map((time) => (
+                            <option key={time} value={time}>
+                                {time}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+            )}
 
-                <label className="block text-sm font-medium mb-1"> Time</label>
-                <select
-                    {...register("time", { required: true })}
-                    className="w-full border rounded-md p-2 bg-white text-gray-800"
-                >
-                    {timeSlots.map((time) => (
-                        <option key={time} value={time}>
-                            {time}
-                        </option>
-                    ))}
-                </select>
-            </div>
 
 
 
@@ -244,10 +255,7 @@ const BookForm = () => {
                                 className="w-full border rounded-md p-2 bg-white text-gray-800"
                             />
                         </div>
-                        <div>
-                            <label className="block text-sm font-medium">Flight Time</label>
-                            <input type="text"  {...register("flightTime", { required: true })} className="w-full border rounded-md p-2 bg-white text-gray-800" />
-                        </div>
+
                         <div>
                             <label className="block text-sm font-medium"> Flight Number</label>
                             <input
@@ -267,12 +275,21 @@ const BookForm = () => {
                             <input
                                 type="text"
                                 {...register("arrivalAirport", { required: true })}
-                                className="w-full border rounded-md p-2 bg-white text-gray-800"
+                                className="w-full border rounded-md p-2 bg-white text-gray-800" // 
                             />
                         </div>
                         <div className="w-full">
                             <label className="block text-sm font-medium">Arrival Time</label>
-                            <input type="text"  {...register("arrivalflightTime", { required: true })} className="w-full border rounded-md p-2 bg-white text-gray-800" />
+                            <select
+                                {...register("arrivalflightTime", { required: true })}
+                                className="w-full border rounded-md p-2 bg-white text-gray-800"
+                            >
+                                {timeSlots.map((time) => (
+                                    <option key={time} value={time}>
+                                        {time}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                         <div className="w-full">
                             <label className=" text-sm font-medium">Arrival Flight Number</label>
@@ -292,7 +309,16 @@ const BookForm = () => {
                         </div>
                         <div className="w-full">
                             <label className=" text-sm font-medium">Departure Time</label>
-                            <input type="text"  {...register("departureflightTime", { required: true })} className="w-full border rounded-md p-2 bg-white text-gray-800" />
+                            <select
+                                {...register("departureflightTime", { required: true })}
+                                className="w-full border rounded-md p-2 bg-white text-gray-800"
+                            >
+                                {timeSlots.map((time) => (
+                                    <option key={time} value={time}>
+                                        {time}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                         <div className="w-full">
                             <label className=" text-sm font-medium">Departure Flight Number</label>
@@ -321,7 +347,7 @@ const BookForm = () => {
 
 
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label className="block text-sm font-medium">Email</label>
                     <input
@@ -330,8 +356,12 @@ const BookForm = () => {
                         className="w-full border rounded-md p-2 text-gray-800 bg-white"
                     />
                 </div>
-                <div>
-                    <label className="block text-sm font-medium">Phone</label>
+                <div >
+                    <div className="flex   items-center">
+                        <label className="block text-sm font-medium mr-1">Phone</label>
+                        <span className="text-sm  text-gray-200">(Include the country code)</span>
+                    </div>
+
                     <input
                         type="tel"
                         {...register("phone", { required: true })}
@@ -351,23 +381,33 @@ const BookForm = () => {
                 />
             </div>
 
-            <div className="w-full">
-                <label className="block text-sm font-medium mb-1">Additional Services</label>
-                <div className="flex space-x-4">
-                    <label className="flex items-center justify-center space-x-1 cursor-pointer">
-                        <input type="checkbox" {...register('golfCart')} className="form-checkbox cursor-pointer text-gray-800 " />
-                        <span>Golf Cart</span>
-                    </label>
-                    <label className="flex items-center justify-center space-x-1 cursor-pointer">
-                        <input type="checkbox" {...register('baggagePorter')} className="form-checkbox cursor-pointer text-gray-800 " />
-                        <span>Baggage Porter</span>
-                    </label>
-                    <label className="flex items-center justify-center space-x-1 cursor-pointer">
-                        <input type="checkbox" {...register('transportation')} className="form-checkbox cursor-pointer text-gray-800 " />
-                        <span>Transportation</span>
-                    </label>
-                </div>
+
+            <label className="block text-sm font-medium mb-1">Additional Services</label>
+            <div className="flex flex-col md:flex-row space-x-4 items-start">
+                <label className="flex items-center justify-center space-x-1 cursor-pointer">
+                    <input type="checkbox" {...register('golfCart')} className="form-checkbox cursor-pointer text-gray-800 " />
+                    <span>Golf Cart</span>
+                </label>
+                <label className="flex items-center justify-center space-x-1 cursor-pointer">
+                    <input type="checkbox" {...register('baggagePorter')} className="form-checkbox cursor-pointer text-gray-800 " />
+                    <span>Baggage Porter</span>
+                </label>
+
+                <label className="flex items-center justify-center space-x-1 cursor-pointer">
+                    <input type="checkbox" {...register('fastTrack')} className="form-checkbox cursor-pointer text-gray-800 " />
+                    <span>Fast Track</span>
+                </label>
+                <label className="flex items-center justify-center space-x-1 cursor-pointer">
+                    <input type="checkbox" {...register('loungePass')} className="form-checkbox cursor-pointer text-gray-800 " />
+                    <span>Lounge Pass</span>
+                </label>
+                <label className="flex items-center justify-center space-x-1 cursor-pointer">
+                    <input type="checkbox" {...register('transportation')} className="form-checkbox cursor-pointer text-gray-800 " />
+                    <span>Transportation</span>
+                </label>
+
             </div>
+
 
             <div className="w-full">
                 <textarea className="w-full bg-white text-black border rounded-md px-3 py-2 text-sm resize-y" rows={4} placeholder="Type any additional info here..."
@@ -394,7 +434,7 @@ const BookForm = () => {
                 type="submit"
                 disabled={submitting}
                 className={`w-full bg-none border cursor-pointer border-white hover:bg-white hover:text-gray-800 text-white py-2 px-4 rounded-sm transition
-                    ${submitting ? 'opacity-50 cursor-not-allowed hover:bg-transparent hover:text-white' : ''}
+                    ${submitting ? 'opacity-50 cursor-not-allowed bg-none text-white hover:text-gray-800 hover:bg-white' : ''}
                     `}
             >
                 {submitting ? 'Booking...' : 'Book Now'}
