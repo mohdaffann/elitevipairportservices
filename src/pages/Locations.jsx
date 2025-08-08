@@ -7,23 +7,23 @@ function LocationAccordion() {
 
     const locationData = [
         {
-            country: "France",
-            cities: ["Nice"]
+            country: "FRANCE",
+            cities: ["Paris -CDG", "Nice -NCE"]
         },
         {
             country: "USA",
-            cities: ["Los Angeles", "Dallas", "New York", "Miami", "San Francisco", "San Diego"]
+            cities: ["Los Angeles -LAX", "Dallas -DFW", "New York -JFK", "Miami -MIA", "San Francisco -SFO", "San Diego -SAN"]
         },
         {
-            country: "Spain",
-            cities: ["Barcelona", "Real Madrid"]
+            country: "SPAIN",
+            cities: ["Barcelona -BCN", "Madrid -MAD"]
         },
         {
-            country: "Italy",
-            cities: ["Rome", "Venice", "Milan"]
+            country: "ITALY",
+            cities: ["Rome -FCO", "Venice -VCE", "Milan -LIN"]
         }, {
             country: "UAE",
-            cities: ["Abu Dhabi", "Dubai"]
+            cities: ["Abu Dhabi -AUH", "Dubai -DXB"]
         }
     ];
 
@@ -32,7 +32,7 @@ function LocationAccordion() {
     }
 
     return (
-        <div className="w-[500px] mt-20 mx-auto p-4  min-h-[calc(100vh-200px)] flex flex-col justify-start">
+        <div className="w-[400px] md:w-[500px]  mt-20 mx-auto p-4  min-h-[calc(100vh-200px)] ">
             <h1 className="text-4xl text-white font-bold text-center mb-4">LOCATIONS</h1>
             {locationData.map((item, index) => (
                 <div key={index} className="border border-white mb-2">
@@ -47,11 +47,11 @@ function LocationAccordion() {
                     </button>
 
                     <div className={`overflow-hidden transition-all duration-300 ease-in-out ${ind === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-                        <div className="border-t border-white">
+                        <div className="">
                             {item.cities.map((city, cityIndex) => (
                                 <div
                                     key={city}
-                                    className={`p-3 pl-6 text-white bg-transparent ${cityIndex !== item.cities.length - 1 ? "border-b border-white border-opacity-30" : ""
+                                    className={`p-3 pl-6 text-white bg-transparent ${cityIndex !== item.cities.length - 1 ? " border-opacity-30" : ""
                                         }`}
                                 >
                                     {city}
