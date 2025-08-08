@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "./layout/Layout";
 import { Navigate, RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Home, BookForm, Locations, TermsConditions, BookingHome, Meet, CountrySelection } from './layout/pageIndex.js'
+import { Home, BookForm, Locations, TermsConditions, BookingHome, Meet, CountrySelection, VipLounge, Fasttrack } from './layout/pageIndex.js'
 function App() {
   const routes = createBrowserRouter([
     {
@@ -30,6 +30,14 @@ function App() {
         }, {
           path: '/selectCountry',
           element: <CountrySelection />
+        },
+        {
+          path: '/lounge',
+          element: <VipLounge />
+        },
+        {
+          path: '/fasttrack',
+          element: <Fasttrack />
         }
 
       ]
