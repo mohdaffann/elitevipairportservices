@@ -44,7 +44,7 @@ function TermsConditions() {
         },
         {
             type: 'Third-Party Services',
-            points: [' When we arrange third-party services (such as porter or chauffeur services or Gold carts ) on your behalf and provide confirmation, we act solely as your agent. We do not have control over the provision of these services.',
+            points: [' When we arrange third-party services (such as porter or chauffeur services or Golf carts ) on your behalf and provide confirmation, we act solely as your agent. We do not have control over the provision of these services.',
                 'We do not guarantee that products and services provided by third parties will always conform to their exact description.'
             ]
         }, {
