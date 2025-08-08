@@ -42,14 +42,14 @@ function Home() {
                         <h2 className="text-white text-2xl md:text-4xl font-bold mb-5">PREMIUM AIRPORT SERVICES</h2>
                     </div>
                     <div className="flex flex-col sm:flex-row justify-center gap-5 place-items-center mb-4">
-                        <ServiceCards title={'Meet & Greet'} img={'/public/Meet.jpg'} nav={'/services/meet-and-greet'} textcolour={'white'} />
+                        <ServiceCards title={'Meet & Greet'} img={'/Meet.jpg'} nav={'/services/meet-and-greet'} textcolour={'white'} />
 
 
                         <ServiceCards title={'Fast Track'} img={'/FastTrack.png'} textcolour={'white'} nav={'/fasttrack'} />
                     </div>
                     <div className="flex flex-col sm:flex-row justify-center gap-5 place-items-center">
                         <ServiceCards title={'Vip Lounge Pass'} img={'/Lounge.jpg'} textcolour={'white'} nav={'lounge'} />
-                        <ServiceCards title={'Transport Services'} img={'/public/Transport.jpg'} textcolour={'white'} />
+                        <ServiceCards title={'Transport Services'} img={'/Transport.jpg'} textcolour={'white'} />
                     </div>
                 </div>
 
