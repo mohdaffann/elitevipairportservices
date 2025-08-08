@@ -6,7 +6,7 @@ function ImageSlider() {
     const [isLoaded, setIsLoaded] = useState(false);
     useEffect(() => {
         const checkInterface = () => {
-            Setmobile(window.innerWidth < 768)
+            Setmobile(window.innerWidth < 1000)
         }
         checkInterface();
         setIsLoaded(true);
@@ -20,11 +20,15 @@ function ImageSlider() {
 
     if (!isLoaded) return null;
     return (
-        <AwesomeSlider organicArrows={true} bullets={false} mobileTouch={true} className="h-screen" startup={true} >
+
+        <AwesomeSlider organicArrows={true} bullets={false} mobileTouch={true} className="h-screen "  >
             {pics.map((item, ind) => (
                 <div key={ind} data-src={item} />
             ))}
         </AwesomeSlider>
+
+
+
     )
 }
 
