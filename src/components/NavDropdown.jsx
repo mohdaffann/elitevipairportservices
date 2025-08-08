@@ -24,7 +24,7 @@ const NavDropdown = ({ title, items, className = "" }) => {
 
       {/* Dropdown Menu */}
       <div
-        className={`absolute top-full left-0 mt-1   w-48  bg-gray-800 rounded-lg shadow-lg border border-gray-200 py-2 z-50 transition-all duration-200 ${isOpen
+        className={`absolute top-full left-0 mt-1   w-64  bg-gray-800 rounded-lg shadow-lg border border-gray-200 py-2 z-50 transition-all duration-200 ${isOpen
           ? 'opacity-100 visible translate-y-0'
           : 'opacity-0 invisible -translate-y-2'
           }`}
@@ -35,7 +35,10 @@ const NavDropdown = ({ title, items, className = "" }) => {
             to={item.href}
             className="block px-4 py-2 text-white hover:bg-blue-50 hover:text-yellow-600 transition-colors duration-150 capitalize"
           >
-            {item.name || item}
+            {item.name}
+            {item.subjAvail &&
+              (<span className='text-gray-400 text-xs ml-1'>Subject to avail</span>)
+            }
           </NavLink>
         ))}
       </div>
