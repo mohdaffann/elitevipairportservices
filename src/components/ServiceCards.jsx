@@ -2,13 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 function ServiceCards({ title, img, nav, textcolour }) {
     return (
-        <div className="group relative h-80 overflow-hidden rounded-lg shadow-lg cursor-pointer">
+        <div className="group relative h-64 w-[400px] overflow-hidden rounded-lg shadow-lg cursor-pointer">
 
             <div className="absolute inset-0 w-full h-full hover:scale-125 active:scale-125 transition duration-200 ease-in-out">
                 <img
                     src={img}
                     alt="London Heathrow"
-                    className="w-full h-full object-cover "
+                    className="w-full h-full object-cover"
                 />
 
             </div>
