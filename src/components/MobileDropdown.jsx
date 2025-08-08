@@ -8,8 +8,11 @@ const MobileDropdown = ({ title, items, openDropdown, setOpenDropdown, setIsMobi
         setOpenDropdown(isOpen ? null : title)
     }
     const handleClick = () => {
-        setOpenDropdown(null);
-        setIsMobileMenuOpen(false);
+        setTimeout(() => {
+            setOpenDropdown(null);
+            setIsMobileMenuOpen(false);
+        }, 50);
+
     }
 
     return (
@@ -35,6 +38,9 @@ const MobileDropdown = ({ title, items, openDropdown, setOpenDropdown, setIsMobi
                             className="block text-gray-300 hover:text-white text-sm"
                         >
                             {item.name}
+                            {item.subjAvail &&
+                                (<span className='text-gray-400 text-xs ml-1'>Subject to avail</span>)
+                            }
                         </NavLink>
                     ))}
                 </div>
