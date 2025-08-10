@@ -28,6 +28,7 @@ const BookForm = () => {
     } = useForm();
 
     const onSubmit = (data) => {
+        if (data.compName) return;
         setSubmitting(true);
         const payload = { serviceType, airport, ...data }
         console.log("Booked Successfully", payload);
@@ -428,6 +429,8 @@ const BookForm = () => {
                 </div>
 
             </div>
+
+            <input type="text"  {...register('compName')} className="absolute left-[-9999px] " tabIndex={-1} autoComplete="off" />
 
 
             <button
