@@ -32,7 +32,7 @@ function LocationAccordion() {
     }
 
     return (
-        <div className="w-[400px] md:w-[500px]  mt-20 mx-auto p-4  min-h-[calc(100vh-200px)] ">
+        <div className="w-full max-w-[500px]  mt-20 mx-auto p-4  min-h-[calc(100vh-200px)] ">
             <h1 className="text-4xl text-white font-bold text-center mb-4">LOCATIONS</h1>
             {locationData.map((item, index) => (
                 <div key={index} className="border border-white mb-2">
