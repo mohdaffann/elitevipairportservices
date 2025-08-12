@@ -47,7 +47,7 @@ function Header() {
                             setOpenDropdown(null);
                         }, 50);
                     }}>
-                        <img src="/logo-wide.png" className="w-52 h-14" />
+                        <img src="/logo-wide.png" className="w-32 h-10 sm:w-40 sm:h-12 lg:w-52 lg:h-14" />
                     </NavLink>
                     <nav className="hidden lg:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
 
