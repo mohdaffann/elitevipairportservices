@@ -39,7 +39,7 @@ function Home() {
 
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 items-center justify-center">
                     <div className="flex items-center justify-center mb-4 ">
-                        <h2 className="text-white text-2xl md:text-4xl font-bold mb-5">PREMIUM AIRPORT SERVICES</h2>
+                        <h2 className="text-white text-xl md:text-4xl font-bold mb-5">PREMIUM AIRPORT SERVICES</h2>
                     </div>
                     <div className="flex flex-col sm:flex-row justify-center gap-5 place-items-center mb-4">
                         <ServiceCards title={'Meet & Greet'} img={'/Meet.jpg'} nav={'/services/meet-and-greet'} textcolour={'white'} />
