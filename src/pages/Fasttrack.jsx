@@ -10,15 +10,15 @@ function Fasttrack() {
                 </div>
             </div>
 
-            <div className="w-full max-w-6xl flex flex-col md:flex-row md:space-x-8 items-start">
+            <div className="w-full max-w-6xl flex flex-col xl:flex-row md:space-x-8 items-start">
 
                 <img
                     src="/FastTrack.png"
                     alt="Chauffeur"
-                    className="w-[400px]  rounded shadow-lg mb-6 md:mb-0 object-cover"
+                    className="w-[400px] md:w-[500px] lg:w-[600px] xl:w-[400px]   rounded shadow-lg mb-6 md:mb-0 object-cover"
                 />
 
-                <div className="text-white  text-base md:text-lg leading-relaxed md:w-1/2 space-y-4 ">
+                <div className="text-white mt-6 md:mt-8 xl:mt-0  text-base md:text-lg lg:text-2xl xl:text-lg leading-relaxed xl:w-1/2 space-y-4 ">
                     <p>
                         Arrive in style with our Fast Track service! Our expert team will escort you through dedicated channels, bypassing long immigration and customs queues.
                     </p>

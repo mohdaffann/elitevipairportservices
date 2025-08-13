@@ -35,9 +35,9 @@ function BookingHome() {
         },
     ];
     return (
-        <div className="mt-6 px-4  bg-none">
+        <div className="mt-16 px-4  bg-none">
             <h1 className="text-2xl md:text-4xl font-bold text-center mt-10  capitalize text-white">{airport.replace(/-/g, " ")} Booking</h1>
-            <div className="grid grid-cols-1 mt-4 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 mt-4 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {services.map((service) => (
                     <div key={service.title} className="flex justify-center">
                         <BookingServiceCard key={service.type} title={service.title}

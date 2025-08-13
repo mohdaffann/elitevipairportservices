@@ -8,7 +8,10 @@ function Layout() {
         <div className="min-h-screen bg-gray-800 flex flex-col overflow-hidden ">
             <ScrollTop />
             <Header />
-            <Outlet />
+            <main className="flex-1">
+                <Outlet />
+            </main>
+
             <Footer />
         </div>
     )
