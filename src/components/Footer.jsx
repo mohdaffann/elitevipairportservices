@@ -25,13 +25,13 @@ function Footer() {
                 <div className="text-sm space-y-2 text-center md:text-right mt-8">
                     <div className="flex items-center justify-center md:justify-end gap-2 ">
                         <Mail className="w-4 h-4 text-white" />
-                        <p className="text-white text-[16px]">
+                        <a href="mailto:info@elitevipairportservices.co.uk" className="text-white text-[16px]">
                             info@elitevipairportservices.co.uk
-                        </p>
+                        </a>
                     </div>
                     <div className="flex items-center justify-center md:justify-end gap-2">
                         <Phone className="w-4 h-4 text-white" />
-                        <p className="text-white text-[16px]">+44 7385234875</p>
+                        <a href="tel:+447385234875" className="text-white text-[16px]">+44 7385234875</a>
                     </div>
                     <div className="flex items-center justify-center md:justify-end gap-2">
                         <MapPin className="w-4 h-4 text-white" />
