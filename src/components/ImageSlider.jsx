@@ -6,7 +6,7 @@ function ImageSlider() {
     const [isLoaded, setIsLoaded] = useState(false);
     useEffect(() => {
         const checkInterface = () => {
-            Setmobile(window.innerWidth < 1000)
+            Setmobile(window.innerWidth < 1026)
         }
         checkInterface();
         setIsLoaded(true);
